@@ -1,9 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title> Test </title>
-</head>
-<body>
-
-</body>
+<!DOCTYPE html> 
+<html> 
+ 
+<head> 
+ <meta name="viewport" content="width=device-width, initial-scale=1"> 
+</head> 
+ 
+<body> 
+ 
+ <button type="button" onclick="alert('You have cancer');">Suicidal button</button> 
+ 
+</body> 
+ 
 </html>
