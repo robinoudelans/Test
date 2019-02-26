@@ -1,14 +1,968 @@
-<!DOCTYPE html> 
-<html> 
- 
-<head> 
- <meta name="viewport" content="width=device-width, initial-scale=1"> 
-</head> 
- 
-<body> 
- 
- <button type="button" onclick="alert('You have cancer');">Suicidal button</button> 
- 
-</body> 
- 
+<!DOCTYPE html>
+
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+
+    <title>Pokemon Game</title>
+</head>
+<body>
+
+<div id="main_frame">
+
+    <div id="background"></div>
+
+    <div id="ending">
+        <p id="ending_text">You Won!!!</p>
+        <img id="end_image">
+        <a id="try_again" href="https://code.sololearn.com/W5944F7O7X0d/?ref=app">Try Again</a>
+    </div>
+
+    <div id="start_menu">
+
+        <div id="starting_text">
+            <p id="greetings"></p>
+
+        </div>
+        <br><a id="start_button" href="#">START</a>
+
+    </div>
+
+    <svg id="YvLandSvg" width="264px" height="77px">
+        <ellipse cx="135" cy="25" rx="100" ry="25"
+                 style="stroke:#c18605;
+                           stroke-width:6px;
+                           fill:#ffbf0f;"></ellipse>
+    </svg>
+
+    <div id="serena">
+        <span class="text1">&nbsp;&nbsp;CHARIZARD&emsp;Lv&nbsp;70</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<progress id="yvBar" max="400" value="400"></progress>
+        <span class="text2">400/400</span>
+    </div>
+
+    <svg id="PikaLandSvg" width="264px" height="77px">
+        <ellipse cx="135" cy="25" rx="100" ry="25"
+                 style="stroke:#c18605;
+                           stroke-width:6px;
+                           fill:#ffbf0f;"></ellipse>
+    </svg>
+
+    <img id="charizard" src="https://i.imgur.com/wZ5ePZt.gif" alt="charizard">
+    <img id="pikachu" src="https://i.imgur.com/gPPOQNE.gif" alt="pikachu">
+    <img id="attack_img">
+    <img id="serena_avatar" src="https://i.imgur.com/zzr5Ceh.png" alt="Serena Avatar">
+
+    <div id="challenger">
+        <span class="text3">&nbsp;&nbsp;PIKACHU&emsp;&emsp;&nbsp;&nbsp;Lv&nbsp;90</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<progress id="pikaBar" max="350" value="350"></progress>
+        <span class="text4">350/350</span>
+    </div>
+
+    <div id="main_box">
+        <p id="textbox1" style="color:white;"></p>
+    </div>
+
+    <div id="main_menu">
+        <p id="textbox2">
+            <a id="fight" href="#">&nbsp;FIGHT</a>&emsp;&emsp;
+            <a id="run" href="#">RUN</a><br><br>
+            <a id="change_pokemon" href="#">CHANGE POKEMON</a>
+        </p>
+    </div>
+
+    <div id="attack_menu">
+        <p id="textbox3">
+            <a id="attack1" href="#">Thunder Bolt</a>&emsp;&emsp;&emsp;&emsp;&nbsp;
+            <a id="attack2" href="#">Tackle</a><br><br>
+            <a id="attack3" href="#">Electro Ball</a>&emsp;&emsp;&emsp;&emsp;&emsp;
+            <a id="attack4" href="#">Volt Tackle</a>
+        </p>
+    </div>
+
+</div>
+</body>
 </html>
+#main_frame{
+    width:495px;
+    height:332px;
+    background-color: #000000;
+    position:relative;
+    transform:rotate(90deg);
+    -webkit-transform:rotate(90deg);
+    top:85px;
+    left:-75px;
+}
+
+#background{
+    background: black url("https://i.imgur.com/vU7Xdcv.png");
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+}
+
+#start_menu{
+    background: #000000 url("https://i.imgur.com/MlDSOY8.jpg");
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 7;
+}
+
+#starting_text{
+    width: 56%;
+    height: 36%;
+    top: 40px;
+    margin:40px auto;
+    padding:5px 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+    color: deeppink;
+    font-family: monospace;
+    text-align: center;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+    position: relative;
+    opacity: 0.7;
+    z-index:9;
+}
+
+#start_button{
+    background: red;
+    color: white;
+    padding: 10px 30px;
+    margin: 0 0 0 170px;
+    text-transform: uppercase;
+    transition: background,color,box-shadow 1s;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+    right: 50px;
+    opacity: 0;
+}
+
+#start_button:hover{
+    padding: 12px 32px;
+    color: red;
+    background: white;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+
+}
+
+body {
+    font-family: sans-serif;
+    font-size:25px;
+    position:relative;
+    background-color:black;
+}
+
+#YvLandSvg {
+    position:absolute;
+    top:105px;
+    right:2px;
+    z-index:1;
+}
+
+#PikaLandSvg{
+    position:absolute;
+    top:206px;
+    z-index:1;
+}
+
+
+@keyframes slidingland{
+    from{right:-200px;}
+    to{ right:2px; }
+}
+
+#serena{
+    width:180px;
+    height:60px;
+    background-color: #ffcfec;
+    border:4px solid #ff307c;
+    border-radius:10px 2px 10px 2px;
+    position:absolute;
+    top:34px;
+    left:26px;
+    z-index:4;
+    box-shadow: 2px 4px 10px rgba(0,0,0,0.4);
+
+}
+
+
+#challenger {
+    width:180px;
+    height:60px;
+    background-color:#ffcfec;
+    border:4px solid #ff307c;
+    border-radius:10px 2px 10px 2px;
+    position:absolute;
+    right:26px;
+    bottom:107px;
+    z-index:4;
+    box-shadow: 2px 4px 10px rgba(0,0,0,0.4);
+
+}
+
+
+.text1,.text2,.text3{
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.text2{
+    margin-left: 64px;
+}
+
+
+.text4{
+    font-size: 15px;
+    font-weight: bold;
+    margin-left: 64px;
+}
+
+#yvBar,#pikaBar{
+    width:126px;
+    height:6px;
+    position: absolute;
+    background-color: #47fb59;
+    border:none;
+}
+
+@keyframes slidingpcl{
+    from{right:600px;}
+    to{right: 230px;}
+}
+
+#charizard{
+    width:150px;
+    height:150px;
+    position:absolute;
+    right:55px;
+    z-index:2;
+}
+
+#attack_img{
+    position: absolute;
+    z-index: 5;
+    opacity: 0;
+}
+
+@keyframes sliding{
+    from{right:-200px;}
+    to{ right:55px; }
+}
+
+#pikachu{
+    width:150px;
+    height:150px;
+    position: absolute;
+    top: 76px;
+    right:285px;
+    z-index:2;
+}
+
+#serena_avatar{
+    position: absolute;
+    top: 115px;
+    opacity:0;
+    z-index:2;
+}
+
+@keyframes slidingpc {
+    from{right:600px;}
+    to{right:286px;}
+}
+
+#main_box{
+    width: 483px;
+    height: 95px;
+    background-color: #ef325f;
+    border: 5px solid #ffcfec;
+    position: relative;
+    top: 226px;
+    z-index: 4;
+}
+
+#main_menu{
+    width: 178px;
+    height: 95px;
+    background-color: white;
+    position: absolute;
+    top: 231px;
+    left: 308px;
+    z-index: 0;
+    border-left: 6px solid rgba(0,0,0,.2);
+    border-bottom-left-radius: 20px;
+    border-top-left-radius:20px;
+}
+
+#attack_menu{
+    width: 483px;
+    height: 95px;
+    background-color: white;
+    border: 6px solid black;
+    position: absolute;
+    top: 226px;
+    z-index: 0;
+}
+
+#textbox1{
+    font-size: 16px;
+    margin:4px 0 0 4px;
+    padding:16px 0 0 8px;
+    border-radius:2px;
+}
+
+#textbox2{
+    font-size: 14px;
+    background-color:white;
+    margin:4px 0 0 4px;
+    padding:16px 0 0 8px;
+    border-radius:2px;
+}
+
+#textbox2 #fight{
+    margin-left: -1px;
+}
+
+
+#textbox3{
+    font-size: 18px;
+    margin-left: 80px;
+    background-color: white;
+    border-radius: 2px;
+}
+
+#textbox3 #attack2{
+    padding-right: 25px;
+    padding-left:25px;
+}
+#textbox3 #attack3{
+    padding:5px 12px 5px 12px;
+}
+#textbox3 #attack4{
+    margin-left:-12px;
+    padding:5px 5px 5px 5px;
+}
+
+
+
+a {
+    text-decoration:none;
+    color:white;
+    font-weight: bold;
+    background: red;
+    padding:5px;
+    border-radius:10px;
+    transition: background 2s;
+}
+
+a:hover{
+    background: green;
+}
+
+#fight{
+    margin-left: 10px;
+}
+
+@keyframes fading{
+    from{opacity: 0.0;}
+    to{opacity: 1;}
+}
+
+#ending{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+}
+
+#ending_text{
+    color: white;
+    font-size: 30px;
+    margin-left: 160px;
+}
+
+#try_again{
+    width: 140px;
+    height: 30px;
+    left: 160px;
+    bottom: 30px;
+    border-radius: 10px;
+    text-align: center;
+    padding-top: 5px;
+    background: #ff467d;
+    color: white;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0);
+    position: fixed;
+}
+
+#end_image{
+    position: fixed;
+    left: 150px
+}
+$(function () {
+
+   
+
+    var areWeTyping = true;
+    var isMegaEvolve = false;
+    var areWeAttacking = false;
+    var isPreviousMiss = false;
+    var firstMoveAfterME = false;
+    var pikachu_img, charizard_img, attack_img, text_box, yvBar, pikaBar, main_menu, attack_menu, rnd, serena_avatar;
+
+    function YvInitialize() {
+        pikachu_img = $("#pikachu");
+        charizard_img = $("#charizard");
+        attack_img = $("#attack_img");
+        text_box = $("#textbox1");
+        yvBar = $("#yvBar");
+        pikaBar = $("#pikaBar");
+        main_menu = $("#main_menu");
+        attack_menu = $("#attack_menu");
+        serena_avatar = $("#serena_avatar");
+        
+        
+
+        YvWriter("#greetings","Dear Trainer, Welcome to Kouwe Kots's Gym!",0,100,false,function () {
+            $("#greetings").html("Dear Trainer, Welcome to <b>Kouwe Kots's Gym!</b>")
+        }, 0);
+
+        setTimeout(function () {
+            $("#start_button")
+                .css("animation", "fading 3s")
+                .css("opacity", "1");
+        },5500);
+
+    }
+
+    setTimeout(YvInitialize,1000);
+
+    $("#start_button").on("click", function () {
+
+        if(!areWeTyping) {
+            $("#start_menu").remove();
+            $("#YvLandSvg").css("animation", "slidingland 3s");
+            $("#PikaLandSvg").css("animation", "slidingpcl 3s");
+            charizard_img.css("animation", "sliding 3s");
+            pikachu_img.css("animation", "slidingpc 3s");
+            $("#serena").css("animation", "fading 3s");
+            $("#challenger").css("animation", "fading 3s");
+
+            setTimeout(function () {
+                writeText("#textbox1", "Gym Leader Kouwe Kots chooses Charizard.~Get ready for battle!", 0, 50);
+            }, 3000);
+
+            setTimeout(function () {
+                $("#main_menu").css("z-index", 6);
+            }, 6500);
+        }
+    });
+
+    $("#fight").on("click", function () {
+        main_menu.css("z-index",0);
+        attack_menu.css("z-index",6);
+    });
+
+    $("#run").on("click", function () {
+        if(!areWeTyping){
+            serena_avatar.css("opacity",1);
+            YvWriter("#textbox1","You tried to run...~But Kouwe Kots grabbed you!!!~Ah ha! So u were running awaya!",0,25,true,function () {
+                serena_avatar.css("opacity",0);
+            },1500);
+        }
+    });
+
+    $("#change_pokemon").on("click", function () {
+        if(!areWeTyping){
+            serena_avatar.css("opacity",1);
+            YvWriter("#textbox1","Changing pokemon is not allowed in~this battle.~(maybe in later update)",0,25,true,function () {
+                serena_avatar.css("opacity",0);
+            },1000);
+        }
+    });
+
+    $("#attack1").on("click", function(){
+        if(!areWeAttacking) {
+            pikachuTurn("https://i.imgur.com/34kVOsd.png",1);
+            areWeAttacking = true;
+        }
+    });
+
+    $("#attack2").on("click", function () {
+        if(!areWeAttacking){
+            pikachuTurn("https://i.imgur.com/dZxzg78.png",2);
+            areWeAttacking=true;
+        }
+    });
+
+    $("#attack3").on("click",function () {
+        if(!areWeAttacking){
+            pikachuTurn("https://i.imgur.com/nBdH2tt.png",3);
+            areWeAttacking=true;
+        }
+    });
+
+    $("#attack4").on("click",function () {
+        if(!areWeAttacking){
+            pikachuTurn("https://i.imgur.com/JRw8Fjn.png",4);
+            areWeAttacking=true;
+        }
+    });
+
+    function pikachuTurn(imgUrl, id) {
+        var i=1.0;
+        attack_img.attr("src",imgUrl);
+        text_box.html("");
+
+        var intervalId = setInterval(function () {
+            i=i-0.1;
+            attack_menu.css("opacity",i);
+
+            if(i<=0){
+                clearInterval(intervalId);
+                animationPikachuAttack(id);
+                attack_menu.css("z-index",0).css("opacity",1);
+            }
+
+        },100);
+    }
+
+    function animationPikachuAttack(id) {
+        var i=0, intervalId;
+        if(id==1) {
+            attack_img.css("opacity", 1);
+            attack_img.css("left", "152px");
+            intervalId = setInterval(function () {
+                i++;
+                attack_img.css("opacity", i % 2 == 0 ? 1 : 0.4);
+
+                if (i >= 10) {
+                    clearInterval(intervalId);
+                    attack_img.css("opacity", 0);
+                    areWeAttacking = false;
+                    attack_img.css("left","0px");
+                    YvWriter(text_box,"Pikachu used: Thunder Bolt.~It's super effective.",0,50,true,function () {
+                        decreaseHp(yvBar,90,".text2","/400",1);
+                        loadCharizardResource(5);
+                    },0);
+
+                }
+
+            },100);
+
+        }else{
+            var b =30;
+            i=80;
+            attack_img.css("opacity", 1).css("bottom","30px").css("left","80px");
+            if(id==2 || id==4)
+                pikachu_img.css("opacity",0);
+
+            intervalId = setInterval(function () {
+                i+=20;
+                attack_img.css("left",i+"px").css("bottom",b+=15);
+
+                if(i>=210){
+                    clearInterval(intervalId);
+                    setTimeout(function () {
+                        attack_img.css("opacity",0).css("bottom","auto").css("left","0px");
+                        if(id==2 || id==4)
+                            pikachu_img.css("opacity",1);
+                        areWeAttacking = false;
+                        if(id==2 || id==3){
+                            YvWriter(text_box,id==2?"Pikachu used: Tackle.~It's not very effective.":"Pikachu used: Electro Ball.~It's super effective.",0,50,true,function () {
+                                decreaseHp(yvBar,id==2?30:80,".text2","/400",1);
+                            },0);
+                        }else{
+                            writeText(text_box,"Pikachu used: Volt Tackle.~It's super effective.~It also damages pikachu.",0,30,true);
+                            setTimeout(function () {
+                                decreaseHp(yvBar,100,".text2","/400",3); //Yv damage
+                                setTimeout(function () {
+                                    decreaseHp(pikaBar,20,".text4","/350",2);
+                                },2000);
+                            },3000);
+                        }
+                        loadCharizardResource(5);
+                    },1000);
+                }
+
+            },100);
+        }
+    }
+
+    function decreaseHp(target, damage, update, toAppend, turn) {
+        var i=1;
+        var intervalId = setInterval(function () {
+            target.val(target.val() - 2);
+            $(update).html(target.val()+toAppend);
+            i+=2;
+            if(i>=damage){
+                clearInterval(intervalId);
+                if(turn==1) {
+                    setTimeout(charizardTurn, 2000);
+                }else if(turn==0){
+                    setTimeout(function () {
+                        if(pikaBar.val()<=0)
+                            battleOver(1);
+                        else
+                            main_menu.css("z-index",6);
+                    },1000);
+                }else if(turn==2){
+                    setTimeout(function () {
+                        if(pikaBar.val()<=0)
+                            battleOver(1);
+                        else
+                            setTimeout(charizardTurn, 1000);
+                    },1000);
+                }
+            }
+        }, 20);
+    }
+
+    function loadCharizardResource(limit) {
+        getRandomNumber(isMegaEvolve?limit:limit-1);
+        if(isMegaEvolve && !firstMoveAfterME){
+            firstMoveAfterME=true;
+            rnd = 3;
+        }
+        if(isMegaEvolve){
+            if(rnd==0)
+                attack_img.attr("src","https://i.imgur.com/PwhPgNW.gif");
+            else if(rnd==1)
+                attack_img.attr("src", "https://i.imgur.com/9YiABUq.png");
+            else if(rnd==2)
+                attack_img.attr("src",'https://i.imgur.com/reSz6Ds.png');
+            else if(rnd==3)
+                attack_img.attr("src","https://i.imgur.com/fB8xmmm.gif");
+        }else {
+            if (rnd == 0)
+                attack_img.attr("src", "https://i.imgur.com/mAuzaqK.gif");
+            else if (rnd == 1)
+                attack_img.attr("src", "https://i.imgur.com/9YiABUq.png");
+            else if (rnd == 2)
+                attack_img.attr("src", "https://i.imgur.com/YF6JLlO.png");
+        }
+
+
+    }
+
+    function charizardTurn() {
+        var i=0;
+        text_box.html("");
+
+        if(!isMegaEvolve && yvBar.val()<=100){
+            getMegaEvolve();
+            return;
+        }
+
+        if(yvBar.val()<=0){
+            battleOver(0);
+            return;
+        }
+
+        if(rnd==0) {
+            if(!isMegaEvolve) {
+                setTimeout(function () {
+                    attack_img.css("opacity", 1).css({WebkitTransform: 'rotate(' + 234 + 'deg)'})
+                        .css({'-moz-transform': 'rotate(' + 234 + 'deg)'})
+                        .css("left", "186px").css("bottom", "22px");
+                    setTimeout(function () {
+                        attack_img.css("opacity", 0);
+                        setTimeout(function () {
+                            YvWriter(text_box, "Charizard used: Flamethrower.", 0, 50, true,function () {
+                                decreaseHp(pikaBar, 30, ".text4", "/350",0);
+                                attack_img.css({WebkitTransform: 'rotate(0deg)'})
+                                    .css({'-moz-transform': 'rotate(0deg)'})
+                                    .css("left", "0px").css("bottom", "auto");
+                            },0);
+                        }, 500);
+                    }, 2000);
+                }, 1000);
+            }else{
+                setTimeout(function () {
+                    attack_img.css("opacity", 1).css({WebkitTransform: 'rotate(' + 234 + 'deg)'})
+                        .css({'-moz-transform': 'rotate(' + 234 + 'deg)'})
+                        .css("left", "126px").css("bottom", "8px");
+                    setTimeout(function () {
+                        attack_img.css("opacity", 0);
+                        setTimeout(function () {
+                            YvWriter(text_box, "Mega Charizard X used: Flamethrower.", 0, 50, true,function () {
+                                decreaseHp(pikaBar, 50, ".text4", "/350",0);
+                                attack_img.css({WebkitTransform: 'rotate(0deg)'})
+                                    .css({'-moz-transform': 'rotate(0deg)'})
+                                    .css("left", "0px").css("bottom", "auto");
+                            },0);
+                        }, 500);
+                    }, 2000);
+                }, 1000);
+            }
+        }else if(rnd==1 || rnd==2){
+            setTimeout(function () {
+                attack_img.css("opacity",1).css("top","100px").css("left","80px");
+                var intervalId = setInterval(function () {
+                    i++;
+                    attack_img.css("opacity", i % 2 == 0 ? 1 : 0.6);
+                    if(i>=10){
+                        clearInterval(intervalId);
+                        attack_img.css("opacity",0).css("top","auto").css("left","0px");
+                        setTimeout(function () {
+                            var char = isMegaEvolve?"Mega Charizard X ":"Charizard ";
+                            YvWriter(text_box,rnd==1?char+"used: Thunder Punch.~It's not very effective.":char+"used: Fire Punch.",0,50,true,function () {
+                                if(rnd==1)
+                                    decreaseHp(pikaBar, isMegaEvolve ? 30 : 20, ".text4", "/350", 0);
+                                else
+                                    decreaseHp(pikaBar,isMegaEvolve?80:50,".text4","/350",0);
+                            },0);
+                        },500);
+                    }
+                },100);
+            },1000);
+        }else if(rnd==3){
+            if(isMegaEvolve) {
+                setTimeout(function () {
+                    attack_img.css("opacity", 1);
+                    setTimeout(function () {
+                        attack_img.css("opacity", 0);
+                        setTimeout(function () {
+                            YvWriter(text_box, "Mega Charizard X used: Blast Burn.~It's super effective.", 0, 50, true,function () {
+                                decreaseHp(pikaBar, 100, ".text4", "/350",0);
+                            },0);
+                        }, 500);
+                    }, 2000);
+                }, 1000);
+            }else{
+                charizardMissedAttack();
+            }
+        }else{
+            charizardMissedAttack();
+        }
+    }
+
+    function charizardMissedAttack(){
+        if(isPreviousMiss){
+            loadCharizardResource(4);
+            isPreviousMiss=false;
+            charizardTurn();
+        }else{
+            isPreviousMiss=true;
+            setTimeout(function () {
+                YvWriter(text_box, isMegaEvolve?"Mega Charizard X attacked.~But it got missed.":"Charizard attacked.~But it got missed.",0,50,true,function () {
+                    main_menu.css("z-index", 6);
+                },1000);
+            },1000);
+        }
+    }
+
+    function increaseHp(functionToExecuteLater, delay) {
+        var i = yvBar.val();
+        var text = $(".text2");
+        var intervalId = setInterval(function () {
+            i+=2;
+            yvBar.val(i);
+            text.html(i+"/400");
+            if(i>=400){
+                clearInterval(intervalId);
+                setTimeout(functionToExecuteLater, delay);
+            }
+        },10);
+    }
+
+    function getMegaEvolve() {
+        var megaStoneIntervalId, i=0;
+        isMegaEvolve=true;
+        attack_img.attr("src","https://i.imgur.com/4XK3MPf.png").css("left","200px").css("top","100px");
+        setTimeout(function () {
+            serena_avatar.css("opacity",1).css("top","120px");
+            YvWriter(text_box,"Kouwe Kots: Your pikachu sure put a good fight,~But sorry your luck has ran out,~*Shows his shiny MEGA EVOLUTION STONE*",0,30,true,function () {
+                text_box.html("<strong>Kouwe Kots:</strong> Your pikachu sure put a good fight,<br>But sorry your luck has ran out,<br>*Shows his shiny <b>MEGA EVOLUTION STONE*</b>");
+            },0);
+
+            setTimeout(function () {
+                megaStoneIntervalId = setInterval(function () {
+                    i++;
+                    attack_img.css("opacity",i%2==0?0:1);
+                    if(i>=9){
+                        clearInterval(megaStoneIntervalId);
+                        setTimeout(function () {
+                            attack_img.css("opacity",0).css("left","0px").css("top","auto");
+                            $("#serena_avatar").css("opacity",0);
+                            megaEvolvePhase2();
+                        },2000);
+                    }
+                },200);
+            },8000);
+
+        },1000);
+    }
+
+    function megaEvolvePhase2() {
+        var i=0;
+        setTimeout(function () {
+            charizard_img.attr("src","https://i.imgur.com/rJUqmRr.gif");
+            var intervalId = setInterval(function () {
+                i++;
+                charizard_img.css("opacity",i%2==0?0:1);
+                if(i>=13){
+                    clearInterval(intervalId);
+                    YvWriter(text_box,"Kouwe Kots used: MEGA STONE, Charizard~has evolved into Mega Charizard X.~His Hp Restored.",0,50,true,function () {
+                        increaseHp(function () {
+                            main_menu.css("z-index",6);
+                        },1000);
+                        $(".text1").css("font-size","13px").html("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mega Charizard X&nbsp;&nbsp;Lv 70");
+                    },0);
+                }
+            },200);
+        },1000);
+    }
+
+
+
+    function battleOver(id) {
+        setTimeout(function () {
+            if(id==0){
+                charizard_img.remove();
+                attack_img.attr("src","https://i.imgur.com/9PT1OTu.png").css("top","50px").css("left","170px");
+                YvWriter(text_box,"Mega Charizard X fainted.~You have won!",0,50,true,function () {
+                    ending(2);
+                },2500);
+            }else{
+                if(yvBar.val()<=0) {
+                    charizard_img.remove();
+                    pikachu_img.remove();
+                    YvWriter(text_box, isMegaEvolve ? "Pikachu fainted.~Mega Charizard X fainted.~It's a draw." : "Pikachu fainted.~Charizard fainted.~It's a draw", 0, 50, true, function () {
+                        ending(1);
+                    }, 3000);
+                }else {
+                    pikachu_img.remove();
+                    YvWriter(text_box,"Pikachu fainted.~Gym Leader Kouwe Kots is the Winner!", 0, 50, true,function () {
+                        ending(0);
+                    },2500);
+                }
+            }
+        },1000);
+    }
+
+    function ending(id) {
+        var ending = $("#ending");
+        var i=0;
+        if(id==0 || id==1){ //lose
+            $("#end_image").attr("src","https://i.imgur.com/Zjj9NcF.jpg");
+            ending.css("z-index",9).css("opacity",0);
+            $("#ending").css("background","black");
+            $("#ending_text").html(id==0?"You Lose!!!":"It's draw!!!");
+
+            var intervalId = setInterval(function () {
+                i=i+0.1;
+                ending.css("opacity",i);
+                if(i>=1){
+                    clearInterval(intervalId);
+                    destroyAll();
+                    $("#try_again").css("z-index",10);
+                }
+            },150);
+
+        }else{
+            serena_avatar.css("opacity",1);
+            YvWriter(text_box,"Kouwe Kots: Congratulations, You have won!!!~Here, Yv badge is all yours.~It's a proof of your victory!",0,50,true,function () {
+                $("#ending").css("background-image","url(https://i.imgur.com/VvJZgeQ.jpg)");
+                var intervalId = setInterval(function () {
+                    attack_img.css("opacity",i%2==0?1:0.6);
+                    i++;
+                    if(i>=11){
+                        setTimeout(win,1000);
+                        clearInterval(intervalId);
+                    }
+                },200);
+            },2000);
+        }
+    }
+
+    function win() {
+        var ending = $("#ending"), i=0;
+        ending.css("z-index",9).css("opacity",0);
+        $("#ending_text").remove();
+        $("#try_again").html("Like Code").css("left","95px").css("bottom","10px");
+        $("#end_gif").css("opacity",1);
+        ending.css("animation", "fading 3s");
+
+        setTimeout(function () {
+            $("#end_image").attr("src","https://i.imgur.com/aiBZD0G.gif").css("left","0px").css("opacity",1);
+            destroyAll();
+            ending.css("z-index",9).css("opacity",1);
+            $("#try_again").css("z-index",10);
+            
+            setTimeout(function(){
+                alert("Take Snapshot 📸📱 & share on your activity feed!!!\n\nMake sure u tag me in that😉\n(Thanks for playing...)");
+            },2000);
+            
+        },2000);
+
+    }
+
+
+    function destroyAll() {
+        $("#background").remove();
+        $("#YvLandSvg").remove();
+        $("#serena").remove();
+        $("#PikaLandSvg").remove();
+        charizard_img.remove();
+        pikachu_img.remove();
+        attack_img.remove();
+        serena_avatar.remove();
+        $("#challenger").remove();
+        $("#main_box").remove();
+        main_menu.remove();
+        attack_menu.remove();
+    }
+
+
+    function writeText(target, message, idx, interval, clear) {
+        areWeTyping = true;
+        if(clear) $(target).html("");
+
+        var intervalId = setInterval(function () {
+
+            if(message[idx]==='~') {
+                $(target).append("<br>");
+                idx++;
+            }else {
+                $(target).append(message[idx++]);
+            }
+
+            if (idx >= message.length) {
+                clearInterval(intervalId);
+                areWeTyping = false;
+            }
+        }, interval);
+    }
+
+    function YvWriter(target, message, idx, interval, clear, funcToExecute, dealy) {
+        areWeTyping = true;
+        if(clear) $(target).html("");
+
+        var intervalId = setInterval(function () {
+
+            if(message[idx]==='~') {
+                $(target).append("<br>");
+                idx++;
+            }else {
+                $(target).append(message[idx++]);
+            }
+
+            if (idx >= message.length) {
+                clearInterval(intervalId);
+                areWeTyping = false;
+                setTimeout(funcToExecute, dealy);
+
+            }
+        }, interval);
+    }
+
+    function getRandomNumber(limit) {
+        rnd = Math.floor(Math.random() * limit);
+    }
+
+});
